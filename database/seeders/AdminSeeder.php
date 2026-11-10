@@ -9,6 +9,7 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
+        $name = config('site.admin_seed.name') ?? 'Administrator';
         $email = config('site.admin_seed.email');
         $password = config('site.admin_seed.password');
 
@@ -18,10 +19,16 @@ class AdminSeeder extends Seeder
             return;
         }
 
-        // Only create when missing, so re-seeding never resets a password someone changed in the admin.
-        if (! AdminUser::where('email', $email)->exists()) {
-            AdminUser::create(['name' => 'Administrator', 'email' => $email, 'password' => $password]);
-            $this->command?->info("Admin user created: {$email}");
+        $admin = AdminUser::where('email', $email)->first();
+
+        if ($admin) {
+            $admin->forceFill(['name' => $name])->save();
+            $this->command?->info("Admin user updated: {$email}");
+
+            return;
         }
+
+        AdminUser::create(['name' => $name, 'email' => $email, 'password' => $password]);
+        $this->command?->info("Admin user created: {$email}");
     }
 }

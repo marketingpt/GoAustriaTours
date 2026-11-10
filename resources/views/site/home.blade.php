@@ -4,6 +4,7 @@
     $t = fn ($key) => $home->text($key);
     $mediaOf = fn ($key) => ($id = $home->content[$key] ?? null) ? \App\Models\Media::find($id) : null;
     $heroMedia = $preload ?? null;
+    $heroVideoUrl = 'https://player.vimeo.com/external/449928180.sd.mp4?s=6d4c4d7e3f95a5a1d5f0b11b6d30f4d2d8d7d2a0&profile_id=164&oauth2_token_id=57447761';
     $whyMedia = $mediaOf('why_media_id');
     $bandMedia = $mediaOf('band_media_id');
     $badgeIcons = ['shield', 'compass', 'user'];
@@ -12,12 +13,16 @@
 @section('content')
 {{-- 3. HERO --}}
 <section class="relative isolate overflow-hidden bg-brand-900 text-white">
-    @if ($heroMedia)
+    @if ($heroVideoUrl)
+        <video class="hero-video absolute inset-0 -z-20 h-full w-full object-cover" autoplay muted loop playsinline poster="{{ $heroMedia ? $heroMedia->url(1600) : '' }}">
+            <source src="{{ $heroVideoUrl }}" type="video/mp4">
+        </video>
+    @elseif ($heroMedia)
         <x-picture :media="$heroMedia" eager :width="1600" sizes="100vw" class="absolute inset-0 -z-20 h-full w-full object-cover"/>
     @endif
     <div class="hero-scrim absolute inset-0 -z-10" aria-hidden="true"></div>
 
-    <div class="container-x grid items-center gap-10 py-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:py-24">
+    <div class="container-x grid items-center gap-10 pt-[240px] pb-[90px] pr-[60px] pl-[60px] lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:pt-[240px] lg:pb-[90px] lg:pr-[60px] lg:pl-[60px]">
         <div>
             <p class="eyebrow mb-4 !text-gold-300">{{ $t('hero_eyebrow') }}</p>
             <h1 class="text-[2.75rem] !text-white sm:text-6xl lg:text-7xl">{{ $t('hero_title') }} <em class="font-medium italic text-gold-200">{{ $t('hero_title_accent') }}</em></h1>
@@ -89,7 +94,176 @@
     </div>
 </section>
 
-{{-- 6. FEATURED PACKAGES --}}
+{{-- 6. TOP DESTINATIONS --}}
+<section class="section-y bg-[radial-gradient(circle_at_top,#f7f1e5,transparent_40%),#f7f3ee]" aria-labelledby="top-destinations-title">
+    <div class="container-x">
+        <div class="mb-8 max-w-3xl">
+            <p class="eyebrow">Top destinations</p>
+            <h2 id="top-destinations-title" class="mt-3 text-4xl leading-tight text-brand-800 sm:text-5xl">From Alpine peaks <em class="font-medium italic text-gold-600">to imperial streets.</em></h2>
+            <p class="mt-4 max-w-2xl text-lg text-ink-soft">Discover Austria’s breathtaking landscapes, charming villages, and historic cities, each revealing a different side of its timeless beauty.</p>
+        </div>
+
+        <div class="mb-10">
+            <x-button size="lg" x-data @click="$dispatch('open-enquiry', { form_name: 'Explore Trips CTA' })">Explore Trips</x-button>
+        </div>
+
+        @php
+            $topDestinations = [
+                [
+                    'title' => 'The Grand Austrian Journey',
+                    'image' => 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80',
+                    'items' => ['Vienna', 'Wachau', 'Salzburg', 'Hallstatt', 'Gosau', 'Innsbruck'],
+                ],
+                [
+                    'title' => 'Imperial & Alpine',
+                    'image' => 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80',
+                    'items' => ['Vienna', 'Melk', 'Linz', 'Salzburg', 'Zell am See', 'Innsbruck'],
+                ],
+                [
+                    'title' => 'Lakeside Austria Escape',
+                    'image' => 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+                    'items' => ['Salzburg', 'St. Gilgen', 'St. Wolfgang', 'Hallstatt', 'Gosau', 'Bad Ischl'],
+                ],
+                [
+                    'title' => 'Danube & Vineyards',
+                    'image' => 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1200&q=80',
+                    'items' => ['Vienna', 'Krems', 'Dürnstein', 'Melk', 'Linz', 'Salzburg'],
+                ],
+                [
+                    'title' => 'The Alpine Discovery',
+                    'image' => 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80',
+                    'items' => ['Innsbruck', 'Seefeld', 'Ötztal', 'Zell am See', 'Kaprun', 'Salzburg'],
+                ],
+                [
+                    'title' => 'Castles & Countryside',
+                    'image' => 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80',
+                    'items' => ['Vienna', 'Graz', 'Klagenfurt', 'Villach', 'Innsbruck', 'Salzburg'],
+                ],
+            ];
+        @endphp
+
+        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            @foreach ($topDestinations as $destination)
+                <article class="group relative min-h-[22rem] overflow-hidden rounded-[var(--radius-card)] shadow-card">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: linear-gradient(180deg, rgb(15 29 23 / 0.1), rgb(15 29 23 / 0.72)), url('{{ $destination['image'] }}');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-brand-900/20 to-transparent"></div>
+
+                    <div class="relative z-10 flex h-full flex-col justify-end p-5 text-white">
+                        <h3 class="text-[1.8rem] leading-tight text-white">{{ $destination['title'] }}</h3>
+                        <ul class="mt-4 grid grid-cols-2 gap-x-3 gap-y-1 text-[0.78rem] text-white/85">
+                            @foreach ($destination['items'] as $place)
+                                <li class="flex items-center gap-2"><span class="text-gold-300">•</span><span>{{ $place }}</span></li>
+                            @endforeach
+                        </ul>
+                        <div class="mt-5">
+                            <x-button variant="outline-light" size="sm" x-data @click="$dispatch('open-enquiry', { form_name: 'Explore Trip', heading: '{{ $destination['title'] }}' })">Explore Now</x-button>
+                        </div>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- 7. AUSTRIA, FRAME BY FRAME --}}
+<section class="section-y bg-brand-900 text-white" aria-labelledby="austria-frame-title">
+    <div class="container-x">
+        <div class="mb-8 max-w-4xl">
+            <h2 id="austria-frame-title" class="text-4xl leading-tight sm:text-5xl">Austria, <em class="font-medium italic text-white">frame by frame.</em></h2>
+            <p class="mt-4 max-w-3xl text-lg text-white/80">From majestic Alpine landscapes to charming historic towns, discover Austria’s most captivating destinations, unforgettable experiences, and hidden gems.</p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+            @php
+                $frameTiles = [
+                    ['title' => 'Lakeside Serenity', 'name' => 'Hallstatt', 'image' => 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80'],
+                    ['title' => 'Alpine Beauty', 'name' => 'Innsbruck', 'image' => 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80'],
+                    ['title' => 'Baroque Charm', 'name' => 'Salzburg', 'image' => 'https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=1200&q=80'],
+                    ['title' => 'Vineyard Escapes', 'name' => 'Wachau', 'image' => 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=1200&q=80'],
+                    ['title' => 'Imperial Elegance', 'name' => 'Vienna', 'image' => 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80'],
+                ];
+            @endphp
+
+            @foreach ($frameTiles as $tile)
+                <article class="group relative overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-white/5 min-h-[16.5rem] shadow-lift">
+                    <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: linear-gradient(180deg, rgb(15 29 23 / 0.1), rgb(15 29 23 / 0.75)), url('{{ $tile['image'] }}');"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900 via-brand-900/30 to-transparent"></div>
+                    <div class="relative z-10 flex h-full flex-col justify-end p-4 text-white">
+                        <p class="text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-gold-300">{{ $tile['title'] }}</p>
+                        <h3 class="mt-2 text-[2rem] leading-none text-white">{{ $tile['name'] }}</h3>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- 8. WHY TRAVEL WITH US / USP --}}
+<section class="section-y bg-sand/60" aria-labelledby="why-travel-title">
+    <div class="container-x grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
+        <div class="lg:pr-6">
+            <p class="eyebrow">WHY TRAVEL WITH US</p>
+            <h2 id="why-travel-title" class="mt-3 text-4xl leading-tight text-brand-800 sm:text-5xl">Discover Austria <em class="font-medium italic text-gold-600">Differently.</em></h2>
+            <p class="mt-5 max-w-xl text-lg text-ink-soft">Discover Austria’s breathtaking landscapes, charming villages, and historic cities, each revealing a different side of its timeless beauty.</p>
+            <p class="mt-8"><x-button size="lg" x-data @click="$dispatch('open-enquiry', { form_name: 'USP CTA' })">Get a free quote</x-button></p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+            <div class="rounded-[var(--radius-card)] bg-white p-6 shadow-card">
+                <p class="text-base font-semibold text-brand-800">Local Expertise</p>
+                <p class="mt-3 text-sm leading-relaxed text-ink-soft">Expert destination knowledge and recommendations for an authentic Austrian experience.</p>
+            </div>
+            <div class="rounded-[var(--radius-card)] bg-white p-6 shadow-card">
+                <p class="text-base font-semibold text-brand-800">Alpine Escapes</p>
+                <p class="mt-3 text-sm leading-relaxed text-ink-soft">Explore Austria’s mountains, lakes, and picturesque countryside through unforgettable scenic routes.</p>
+            </div>
+            <div class="rounded-[var(--radius-card)] bg-white p-6 shadow-card">
+                <p class="text-base font-semibold text-brand-800">Cultural Immersion</p>
+                <p class="mt-3 text-sm leading-relaxed text-ink-soft">Discover imperial palaces, classical music, traditional cuisine, and local Alpine culture.</p>
+            </div>
+            <div class="rounded-[var(--radius-card)] bg-white p-6 shadow-card">
+                <p class="text-base font-semibold text-brand-800">Bespoke Journeys</p>
+                <p class="mt-3 text-sm leading-relaxed text-ink-soft">Personalized itineraries designed around your interests, travel style, and budget.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- 9. TRAVEL WITH CONFIDENCE --}}
+<section class="section-y bg-[radial-gradient(circle_at_top,#fbf6ee,#f7f3ee_55%,#f2efe9)]" aria-labelledby="travel-confidence-title">
+    <div class="container-x max-w-6xl">
+        <div class="text-center">
+            <p class="eyebrow text-brand-700">TRAVEL WITH CONFIDENCE</p>
+            <h2 id="travel-confidence-title" class="mt-3 text-4xl leading-tight text-brand-800 sm:text-5xl">Seamless Payments <em class="font-medium italic text-gold-600">Simple, Secure &amp; Stress-Free.</em></h2>
+            <p class="mx-auto mt-5 max-w-3xl text-lg text-ink-soft">Make booking your Austria getaway simple and stress-free with secure payments, flexible options, and hassle-free confirmations.</p>
+        </div>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            <div class="rounded-[var(--radius-card)] bg-white p-5 shadow-card">
+                <p class="text-base font-semibold text-brand-800">Individual Payments</p>
+                <p class="mt-2 text-sm leading-relaxed text-ink-soft">Each traveller pays their share online with ease.</p>
+            </div>
+            <div class="rounded-[var(--radius-card)] bg-white p-5 shadow-card">
+                <p class="text-base font-semibold text-brand-800">Secure Transactions</p>
+                <p class="mt-2 text-sm leading-relaxed text-ink-soft">Enjoy safe and reliable payments from anywhere.</p>
+            </div>
+            <div class="rounded-[var(--radius-card)] bg-white p-5 shadow-card">
+                <p class="text-base font-semibold text-brand-800">Instant Confirmation</p>
+                <p class="mt-2 text-sm leading-relaxed text-ink-soft">Receive booking confirmations straight to your inbox.</p>
+            </div>
+            <div class="rounded-[var(--radius-card)] bg-white p-5 shadow-card">
+                <p class="text-base font-semibold text-brand-800">Flexible Options</p>
+                <p class="mt-2 text-sm leading-relaxed text-ink-soft">Choose convenient payment options that suit your group.</p>
+            </div>
+        </div>
+
+        <div class="mt-10 text-center">
+            <x-button size="lg" x-data @click="$dispatch('open-enquiry', { form_name: 'Payment CTA' })">Get a free quote</x-button>
+        </div>
+    </div>
+</section>
+
+{{-- 10. FEATURED PACKAGES --}}
 @if ($featured->isNotEmpty())
 <section class="section-y" aria-labelledby="packages-title">
     <div class="container-x">
@@ -102,7 +276,7 @@
 </section>
 @endif
 
-{{-- 7. HOW IT WORKS --}}
+{{-- 9. HOW IT WORKS --}}
 <section class="section-y bg-brand-800 text-white" aria-labelledby="how-title">
     <div class="container-x">
         <x-section-heading light :eyebrow="$t('how_eyebrow')" :title="$t('how_title')"/>
@@ -115,17 +289,6 @@
                 </li>
             @endforeach
         </ol>
-    </div>
-</section>
-
-{{-- Full-width image band --}}
-<section class="relative isolate overflow-hidden bg-brand-900 py-24 text-center text-white sm:py-32" aria-label="{{ $t('band_title') }}">
-    @if ($bandMedia)<x-picture :media="$bandMedia" sizes="100vw" class="absolute inset-0 -z-20 h-full w-full object-cover"/>@endif
-    <div class="absolute inset-0 -z-10 bg-brand-900/60" aria-hidden="true"></div>
-    <div class="container-x">
-        <p class="font-display text-4xl italic sm:text-6xl">{{ $t('band_title') }}</p>
-        <p class="mx-auto mt-4 max-w-xl text-lg text-white/90">{{ $t('band_text') }}</p>
-        <x-button class="mt-8" size="lg" x-data @click="$dispatch('open-enquiry', { form_name: 'Image Band Button' })">Request my free quote</x-button>
     </div>
 </section>
 
@@ -160,7 +323,104 @@
 </section>
 @endif
 
-{{-- 10. FINAL CALL TO ACTION --}}
+{{-- 10. IMAGINE YOUR JOURNEY --}}
+<section class="relative isolate overflow-hidden bg-brand-900 py-24 text-white sm:py-32" aria-labelledby="journey-imagine-title">
+    <video class="hero-video absolute inset-0 -z-20 h-full w-full object-cover" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80">
+        <source src="https://player.vimeo.com/external/449928180.sd.mp4?s=6d4c4d7e3f95a5a1d5f0b11b6d30f4d2d8d7d2a0&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
+    </video>
+    <div class="hero-scrim absolute inset-0 -z-10" aria-hidden="true"></div>
+
+    <div class="container-x">
+        <div class="max-w-3xl py-8 md:py-12">
+            <p class="text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-gold-300">Picture this</p>
+            <h3 id="journey-imagine-title" class="mt-3 text-4xl leading-tight text-white sm:text-5xl lg:text-6xl">Picture yourself by an Alpine lake.</h3>
+            <p class="mt-4 max-w-xl text-lg leading-relaxed text-white/80">Tell us what you imagine and we will shape the journey around it.</p>
+        </div>
+    </div>
+</section>
+
+{{-- 11. DISCOVER AUSTRIA --}}
+<section class="section-y bg-sand/60" aria-labelledby="discover-austria-title">
+    <div class="container-x">
+        <div class="mb-8 max-w-4xl">
+            <p class="eyebrow">DISCOVER AUSTRIA</p>
+            <h2 id="discover-austria-title" class="mt-3 text-4xl leading-tight text-brand-800 sm:text-5xl">Planning Your Next <em class="font-medium italic text-gold-600">Austrian Escape?</em></h2>
+            <p class="mt-4 max-w-3xl text-lg text-ink-soft">From Austria’s majestic Alpine landscapes to its charming villages and elegant historic cities, discover remarkable destinations, authentic experiences, and unforgettable journeys—thoughtfully tailored around the way you want to explore Austria.</p>
+        </div>
+
+        <div class="mb-8">
+            <x-button size="lg" x-data @click="$dispatch('open-enquiry', { form_name: 'Discover Austria CTA' })">Get a free quote</x-button>
+        </div>
+
+        @php
+            $packagesCarousel = $featured->take(6);
+        @endphp
+
+        @if ($packagesCarousel->isNotEmpty())
+            <div class="overflow-x-auto pb-2">
+                <div class="flex gap-6 min-w-max">
+                    @foreach ($packagesCarousel as $package)
+                        <div class="w-[22rem] shrink-0">
+                            <x-package-card :package="$package"/>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+    </div>
+</section>
+
+{{-- 11. BLOG --}}
+<section class="section-y" aria-labelledby="blog-title">
+    <div class="container-x">
+        <div class="mb-8 flex items-end justify-between gap-4">
+            <div>
+                <p class="eyebrow">Blog</p>
+                <h2 id="blog-title" class="mt-2 text-4xl leading-tight text-brand-800 sm:text-5xl">Latest from Austria</h2>
+            </div>
+            <a href="{{ route('packages.index') }}" class="hidden text-sm font-semibold text-brand-700 hover:text-gold-700 sm:inline-flex">View all articles <x-icon name="arrow-right" class="h-4 w-4"/></a>
+        </div>
+
+        @php
+            $blogPosts = [
+                [
+                    'title' => 'The most scenic alpine roads in Austria',
+                    'excerpt' => 'From dramatic passes to lakeside drives, these routes reveal the very best of Austrian scenery.',
+                    'image' => 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80',
+                    'meta' => 'Travel Guide',
+                ],
+                [
+                    'title' => 'A weekend in Vienna, Salzburg and the Wachau',
+                    'excerpt' => 'A refined itinerary balancing imperial history, riverside wine villages and long lunches.',
+                    'image' => 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=80',
+                    'meta' => 'Itineraries',
+                ],
+                [
+                    'title' => 'What to know before exploring the Austrian Alps',
+                    'excerpt' => 'Practical tips for rail routes, mountain villages and choosing the right pace for your holiday.',
+                    'image' => 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=80',
+                    'meta' => 'Planning',
+                ],
+            ];
+        @endphp
+
+        <div class="grid gap-6 md:grid-cols-3">
+            @foreach ($blogPosts as $post)
+                <article class="overflow-hidden rounded-[var(--radius-card)] bg-white shadow-card">
+                    <div class="aspect-[16/11] bg-cover bg-center" style="background-image: url('{{ $post['image'] }}');"></div>
+                    <div class="p-6">
+                        <p class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-gold-700">{{ $post['meta'] }}</p>
+                        <h3 class="mt-3 text-2xl leading-tight text-brand-800">{{ $post['title'] }}</h3>
+                        <p class="mt-3 text-sm leading-relaxed text-ink-soft">{{ $post['excerpt'] }}</p>
+                        <a href="{{ route('packages.index') }}" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:text-gold-700">Read article <x-icon name="arrow-right" class="h-4 w-4"/></a>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- 12. FINAL CALL TO ACTION --}}
 <section class="section-y bg-brand-700 text-center text-white" aria-labelledby="cta-title">
     <div class="container-x max-w-3xl">
         <h2 id="cta-title" class="text-4xl !text-white sm:text-5xl">{{ $t('cta_title') }}</h2>

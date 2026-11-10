@@ -11,8 +11,100 @@
 @source "../../app/Support/Consent.php";
 
 /* Hero scrim over the photograph */
+.hero-video {
+    min-width: 100%;
+    min-height: 100%;
+    filter: saturate(0.9) contrast(1.05);
+}
+
 .hero-scrim {
     background:
         linear-gradient(180deg, rgb(15 29 23 / 0.55) 0%, rgb(15 29 23 / 0.35) 40%, rgb(15 29 23 / 0.8) 100%),
         linear-gradient(90deg, rgb(15 29 23 / 0.65) 0%, rgb(15 29 23 / 0.1) 70%);
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    margin-bottom: -110px;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header__inner {
+    min-height: 76px;
+    transition: min-height 0.3s ease, padding 0.3s ease;
+}
+
+.site-header:not(.site-header--scrolled) {
+    background: transparent;
+    box-shadow: none;
+}
+
+.site-header__logo {
+    display: block;
+    width: 250px;
+    max-width: 100%;
+    height: auto;
+    transition: width 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+    transform-origin: left center;
+}
+
+.site-header__nav a,
+.site-header__nav button,
+.site-header__menu-button,
+.site-header__action {
+    color: rgba(255, 255, 255, 0.9);
+    transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.site-header__nav a:hover,
+.site-header__nav a:focus-visible,
+.site-header__nav button:hover,
+.site-header__nav button:focus-visible,
+.site-header__menu-button:hover,
+.site-header__menu-button:focus-visible {
+    color: #f7d79b;
+}
+
+.site-header--scrolled {
+    background: #F8F7F3;
+    border-bottom-color: rgba(23, 44, 35, 0.08);
+    box-shadow: 0 1px 0 rgba(23, 44, 35, 0.08);
+}
+
+.site-header--scrolled .site-header__logo {
+    width: 180px;
+}
+
+.site-header--scrolled .site-header__logo-img {
+    filter: brightness(0) saturate(100%) invert(15%) sepia(19%) saturate(1700%) hue-rotate(335deg) brightness(95%) contrast(90%);
+}
+
+.site-header--scrolled .site-header__nav a,
+.site-header--scrolled .site-header__nav button,
+.site-header--scrolled .site-header__menu-button,
+.site-header--scrolled .site-header__action {
+    color: #172c23;
+}
+
+.site-header--scrolled .site-header__nav a:hover,
+.site-header--scrolled .site-header__nav a:focus-visible,
+.site-header--scrolled .site-header__nav button:hover,
+.site-header--scrolled .site-header__nav button:focus-visible,
+.site-header--scrolled .site-header__menu-button:hover,
+.site-header--scrolled .site-header__menu-button:focus-visible {
+    color: #6f5730;
+}
+
+@media (max-width: 1023px) {
+    .site-header__menu-button {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .site-header--scrolled .site-header__menu-button {
+        color: #172c23;
+    }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Package extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'tour_type_id', 'destination_id', 'nights', 'price_from', 'currency', 'price_note', 'summary',
+        'title', 'slug', 'source_id', 'tour_type_id', 'destination_id', 'nights', 'price_from', 'currency', 'price_note', 'summary',
         'description', 'highlights', 'itinerary', 'inclusions', 'exclusions', 'faqs', 'media_id', 'seo_title',
         'meta_description', 'og_media_id', 'noindex', 'is_published', 'is_featured', 'is_sample', 'sort_order',
     ];
