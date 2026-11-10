@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory>tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>app</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing" force="true"/>
+        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_STORE" value="array" force="true"/>
+        <!-- Tests use in-memory SQLite and NEVER touch the real MySQL database -->
+        <env name="DB_CONNECTION" value="sqlite" force="true"/>
+        <env name="DB_DATABASE" value=":memory:" force="true"/>
+        <env name="MAIL_MAILER" value="array" force="true"/>
+        <env name="PULSE_ENABLED" value="false"/>
+        <env name="QUEUE_CONNECTION" value="sync" force="true"/>
+        <env name="SESSION_DRIVER" value="array" force="true"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
+        <!-- Tests must never reach the live CRM: GHL is force-blanked -->
+        <env name="GHL_API_TOKEN" value="" force="true"/>
+        <env name="GHL_LOCATION_ID" value="" force="true"/>
+        <env name="RECAPTCHA_SITE_KEY" value="test-site-key" force="true"/>
+        <env name="RECAPTCHA_SECRET_KEY" value="test-secret-key" force="true"/>
+        <env name="ADMIN_SEED_EMAIL" value="" force="true"/>
+        <env name="ADMIN_SEED_PASSWORD" value="" force="true"/>
+    </php>
+</phpunit>

@@ -1,0 +1,15 @@
+/* Admin stylesheet: same tokens as the public site, scans only admin views and shared components. */
+@import "tailwindcss" source(none);
+@import "./theme.css";
+@import "./base.css";
+@import "trix/dist/trix.css";
+
+@source "../views/layouts/admin.blade.php";
+@source "../views/admin";
+@source "../views/components";
+@source "../js";
+
+body { background-color: #f5f3ee; }
+trix-editor { min-height: 14rem; background: #fff; border-radius: 0.5rem; }
+trix-editor:focus { outline: none; box-shadow: 0 0 0 3px rgb(176 141 87 / 0.45); }
+trix-toolbar .trix-button-group--file-tools { display: none; } /* images go through the Media library */

@@ -1,0 +1,18 @@
+/* Public site stylesheet. Tailwind scans only public views and shared components. */
+@import "tailwindcss" source(none);
+@import "./theme.css";
+@import "./base.css";
+
+@source "../views/layouts/site.blade.php";
+@source "../views/site";
+@source "../views/components";
+@source "../views/partials";
+@source "../js";
+@source "../../app/Support/Consent.php";
+
+/* Hero scrim over the photograph */
+.hero-scrim {
+    background:
+        linear-gradient(180deg, rgb(15 29 23 / 0.55) 0%, rgb(15 29 23 / 0.35) 40%, rgb(15 29 23 / 0.8) 100%),
+        linear-gradient(90deg, rgb(15 29 23 / 0.65) 0%, rgb(15 29 23 / 0.1) 70%);
+}

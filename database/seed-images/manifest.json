@@ -1,0 +1,21 @@
+{
+  "_note": "All images are from Pexels (free for commercial use under the Pexels License, no attribution required). Photographer names are as shown on the Pexels page/file name. Keep docs/reference/IMAGE_CREDITS.md in sync.",
+  "images": {
+    "hallstatt-lake":      { "pexels_id": 36183115, "photographer": "tkirkgoz",  "alt": "Misty mountains rising above the lake and rooftops of Hallstatt, Austria", "url": "https://www.pexels.com/photo/picturesque-view-of-hallstatt-with-alpine-lake-36183115/" },
+    "hallstatt-church":    { "pexels_id": 33586871, "photographer": "Kibo",      "alt": "Hallstatt village and its church spire beside the lake", "url": "https://www.pexels.com/photo/scenic-view-of-hallstatt-with-iconic-church-33586871/" },
+    "vienna-belvedere":    { "pexels_id": 36934590, "photographer": "tkirkgoz",  "alt": "Belvedere Palace and Baroque fountain in Vienna", "url": "https://www.pexels.com/photo/36934590/" },
+    "vienna-hofburg":      { "pexels_id": 19343897, "photographer": "Ekam Juneja", "alt": "Hofburg Palace dome and facade in Vienna", "url": "https://www.pexels.com/photo/19343897/" },
+    "vienna-aerial":       { "pexels_id": 31750014, "photographer": "alfred-franz", "alt": "Aerial view of Vienna's town hall and churches", "url": "https://www.pexels.com/photo/31750014/" },
+    "salzburg-fortress":   { "pexels_id": 37887299, "photographer": "David Magauer", "alt": "Hohensalzburg Fortress seen from the Mirabell Gardens in Salzburg", "url": "https://www.pexels.com/photo/37887299/" },
+    "salzburg-cathedral":  { "pexels_id": 38549879, "photographer": "John Netrebchuk", "alt": "Tower of Salzburg Cathedral", "url": "https://www.pexels.com/photo/38549879/" },
+    "innsbruck-alps":      { "pexels_id": 39759910, "photographer": "Lexi",      "alt": "Colourful Innsbruck buildings beneath snowy Alpine peaks", "url": "https://www.pexels.com/photo/colorful-innsbruck-buildings-with-snowy-alps-39759910/" },
+    "innsbruck-riverside": { "pexels_id": 34408230, "photographer": "Michael Fischer", "alt": "Riverside buildings in Innsbruck beside snowy peaks", "url": "https://www.pexels.com/photo/colorful-buildings-in-front-of-alpine-mountains-34408230/" },
+    "grossglockner-road":  { "pexels_id": 17612627, "photographer": "Alan Kabes", "alt": "A serpentine section of the Grossglockner High Alpine Road", "url": "https://www.pexels.com/photo/one-of-the-grossglockner-high-alpine-road-serpentines-17612627/" },
+    "alpine-road":         { "pexels_id": 38840996, "photographer": "Hobi",      "alt": "Winding scenic road through the Austrian Alps", "url": "https://www.pexels.com/photo/scenic-alpine-road-through-austrian-mountains-38840996/" },
+    "wachau-durnstein":    { "pexels_id": 32674846, "photographer": "Kibo",      "alt": "Dürnstein church, vineyards and the Danube in the Wachau valley", "url": "https://www.pexels.com/photo/32674846/" },
+    "wachau-vineyards":    { "pexels_id": 34513551, "photographer": "Frank Wesneck", "alt": "Wachau vineyards at autumn sunset", "url": "https://www.pexels.com/photo/34513551/" },
+    "melk-abbey":          { "pexels_id": 31641849, "photographer": "bruggi",    "alt": "Aerial view of the Baroque Melk Abbey", "url": "https://www.pexels.com/photo/31641849/" },
+    "hikers":              { "pexels_id": 35904998, "photographer": "Nils Rotura", "alt": "Hikers on a scenic mountain trail in the Austrian Alps", "url": "https://www.pexels.com/photo/35904998/" },
+    "alpine-peaks":        { "pexels_id": 27772233, "photographer": "Ivan Drazic", "alt": "Summer view of high Alpine peaks in Austria", "url": "https://www.pexels.com/photo/27772233/" }
+  }
+}

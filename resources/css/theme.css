@@ -1,0 +1,91 @@
+/*
+ * DESIGN TOKENS: the one place to re-skin the brand.
+ * Change colours/fonts here and every component follows (see docs/reference/DESIGN_SYSTEM.md).
+ */
+
+@font-face {
+    font-family: "Inter Variable";
+    src: url("../fonts/inter-latin-wght-normal.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Cormorant Garamond Variable";
+    src: url("../fonts/cormorant-garamond-latin-wght-normal.woff2") format("woff2");
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Cormorant Garamond Variable";
+    src: url("../fonts/cormorant-garamond-latin-wght-italic.woff2") format("woff2");
+    font-weight: 300 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Metric-matched fallbacks: the system font is scaled to occupy the same space as the web font,
+   so the swap after load causes no layout shift (CLS). Values measured against Arial / Times New Roman. */
+@font-face {
+    font-family: "Inter Fallback";
+    src: local("Arial"), local("Helvetica");
+    size-adjust: 107.1%;
+    ascent-override: 90.5%;
+    descent-override: 22.6%;
+    line-gap-override: 0%;
+}
+@font-face {
+    font-family: "Cormorant Fallback";
+    src: local("Times New Roman"), local("Times");
+    size-adjust: 91.2%;
+    ascent-override: 101.3%;
+    descent-override: 31.5%;
+    line-gap-override: 0%;
+}
+
+@theme {
+    /* Fonts */
+    --font-display: "Cormorant Garamond Variable", "Cormorant Fallback", Georgia, "Times New Roman", serif;
+    --font-sans: "Inter Variable", "Inter Fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    /* Brand: deep alpine green */
+    --color-brand-50: #f1f5f2;
+    --color-brand-100: #dde7e0;
+    --color-brand-200: #bbcfc2;
+    --color-brand-300: #8fae9b;
+    --color-brand-400: #5f8a71;
+    --color-brand-500: #3a6650;
+    --color-brand-600: #2b4f3e;
+    --color-brand-700: #1f3a2e;
+    --color-brand-800: #172c23;
+    --color-brand-900: #0f1d17;
+
+    /* Brass gold (accents, eyebrows, lines) */
+    --color-gold-50: #fbf6ec;
+    --color-gold-100: #f4e8cf;
+    --color-gold-200: #e8d1a0;
+    --color-gold-300: #d9b873;
+    --color-gold-400: #c8a064;
+    --color-gold-500: #b08d57;
+    --color-gold-600: #8f7040;
+    --color-gold-700: #6f5730;
+    --color-gold-800: #544224;
+
+    /* Call-to-action orange (buttons, quiz border). White text on 600+ passes AA. */
+    --color-cta-400: #ee8a45;
+    --color-cta-500: #dd6b24;
+    --color-cta-600: #b94f14;
+    --color-cta-700: #96400f;
+
+    /* Neutrals */
+    --color-ivory: #faf7f0;
+    --color-sand: #f1ebdd;
+    --color-ink: #22262a;
+    --color-ink-soft: #4a5057;
+
+    /* Shape and shadow */
+    --radius-card: 1rem;
+    --shadow-card: 0 1px 2px rgb(15 29 23 / 0.06), 0 12px 32px -12px rgb(15 29 23 / 0.18);
+    --shadow-lift: 0 2px 4px rgb(15 29 23 / 0.08), 0 24px 48px -16px rgb(15 29 23 / 0.3);
+}
