@@ -24,8 +24,8 @@
         {{-- Desktop navigation --}}
         <nav class="site-header__nav hidden items-center gap-1 lg:flex" aria-label="Main">
             @foreach ([['Travel styles', $navTourTypes, fn ($i) => route('packages.index', ['type' => $i->slug])], ['Destinations', $navDestinations, fn ($i) => route('destinations.show', $i->slug)]] as [$label, $items, $url])
-                <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" @keydown.escape="open = false" @click.outside="open = false">
-                    <button type="button" class="inline-flex items-center gap-1 rounded px-3 py-2 text-sm font-medium hover:text-gold-700" :aria-expanded="open" aria-haspopup="true" @click="open = !open">
+                <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false" @focusin="open = true" @focusout="if (!$el.contains($event.relatedTarget)) open = false" @keydown.escape="open = false" @click.outside="open = false">
+                    <button type="button" class="inline-flex items-center gap-1 rounded px-3 py-2 text-sm font-medium hover:text-gold-700" :aria-expanded="open" aria-haspopup="true" @click="open = true">
                         {{ $label }}<x-icon name="chevron-down" class="h-4 w-4"/>
                     </button>
                     <div x-cloak x-show="open" x-transition.opacity class="absolute left-0 top-full z-50 w-64 pt-2">

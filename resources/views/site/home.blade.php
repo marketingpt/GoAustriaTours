@@ -8,6 +8,7 @@
     $whyMedia = $mediaOf('why_media_id');
     $bandMedia = $mediaOf('band_media_id');
     $badgeIcons = ['shield', 'compass', 'user'];
+    $heroDestinations = ['Vienna', 'Salzburg', 'Hallstatt', 'Innsbruck', 'Wachau', 'Zell am See', 'Graz'];
 @endphp
 
 @section('content')
@@ -22,22 +23,37 @@
     @endif
     <div class="hero-scrim absolute inset-0 -z-10" aria-hidden="true"></div>
 
-    <div class="container-x grid items-center gap-10 pt-[240px] pb-[90px] pr-[60px] pl-[60px] lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:pt-[240px] lg:pb-[90px] lg:pr-[60px] lg:pl-[60px]">
+    <div class="container-x grid items-center gap-8 pt-[180px] pb-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:pt-[210px] lg:pb-12">
         <div>
-            <p class="eyebrow mb-4 !text-gold-300">{{ $t('hero_eyebrow') }}</p>
-            <h1 class="text-[2.75rem] !text-white sm:text-6xl lg:text-7xl">{{ $t('hero_title') }} <em class="font-medium italic text-gold-200">{{ $t('hero_title_accent') }}</em></h1>
-            <p class="mt-6 max-w-xl text-lg text-white/90 sm:text-xl">{{ $t('hero_sub') }}</p>
-            <ul class="mt-8 grid gap-4 sm:grid-cols-3">
+            <p class="eyebrow mb-3 !text-gold-300">{{ $t('hero_eyebrow') }}</p>
+            <h1 class="max-w-2xl text-5xl !text-white sm:text-6xl lg:text-7xl">{{ $t('hero_title') }} <em class="font-medium italic text-gold-200">{{ $t('hero_title_accent') }}</em></h1>
+            <p class="mt-4 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">{{ $t('hero_sub') }}</p>
+            <ul class="mt-6 grid gap-4">
                 @foreach ([1, 2, 3] as $n)
-                    <li class="flex items-start gap-3">
-                        <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold-300/60 text-gold-300"><x-icon :name="$badgeIcons[$n - 1]" class="h-5 w-5"/></span>
-                        <span><span class="block text-sm font-semibold text-white">{{ $t("badge_{$n}_title") }}</span><span class="block text-xs text-white/75">{{ $t("badge_{$n}_text") }}</span></span>
+                    <li class="flex items-start gap-2.5">
+                        <span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold-300/60 text-gold-300"><x-icon :name="$badgeIcons[$n - 1]" class="h-4 w-4"/></span>
+                        <span class="min-w-0 space-y-1"><span class="block text-sm font-semibold leading-snug text-white">{{ $t("badge_{$n}_title") }}</span><span class="block text-xs leading-relaxed text-white/75">{{ $t("badge_{$n}_text") }}</span></span>
                     </li>
                 @endforeach
             </ul>
         </div>
         <div>
             <x-quiz-card :steps="$steps"/>
+        </div>
+    </div>
+
+    <div class="hero-destinations" role="region" aria-label="Popular Austria destinations">
+        <p class="hero-destinations__label">Explore Austria</p>
+        <div class="hero-destinations__viewport">
+            <div class="hero-destinations__track">
+                @foreach (range(0, 3) as $duplicate)
+                    <ul class="hero-destinations__group" @if ($duplicate > 0) aria-hidden="true" @endif>
+                        @foreach ($heroDestinations as $destination)
+                            <li>{{ $destination }}</li>
+                        @endforeach
+                    </ul>
+                @endforeach
+            </div>
         </div>
     </div>
 </section>
@@ -169,7 +185,7 @@
 <section class="section-y bg-brand-900 text-white" aria-labelledby="austria-frame-title">
     <div class="container-x">
         <div class="mb-8 max-w-4xl">
-            <h2 id="austria-frame-title" class="text-4xl leading-tight sm:text-5xl">Austria, <em class="font-medium italic text-white">frame by frame.</em></h2>
+            <h2 id="austria-frame-title" class="text-4xl leading-tight text-white sm:text-5xl">Austria, <em class="font-medium italic text-gold-200">frame by frame.</em></h2>
             <p class="mt-4 max-w-3xl text-lg text-white/80">From majestic Alpine landscapes to charming historic towns, discover Austria’s most captivating destinations, unforgettable experiences, and hidden gems.</p>
         </div>
 
@@ -240,18 +256,22 @@
 
         <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             <div class="rounded-[var(--radius-card)] bg-white p-5 shadow-card">
+                <x-icon name="wallet" class="mb-4 h-10 w-10 text-gold-700"/>
                 <p class="text-base font-semibold text-brand-800">Individual Payments</p>
                 <p class="mt-2 text-sm leading-relaxed text-ink-soft">Each traveller pays their share online with ease.</p>
             </div>
             <div class="rounded-[var(--radius-card)] bg-white p-5 shadow-card">
+                <x-icon name="shield" class="mb-4 h-10 w-10 text-gold-700"/>
                 <p class="text-base font-semibold text-brand-800">Secure Transactions</p>
                 <p class="mt-2 text-sm leading-relaxed text-ink-soft">Enjoy safe and reliable payments from anywhere.</p>
             </div>
             <div class="rounded-[var(--radius-card)] bg-white p-5 shadow-card">
+                <x-icon name="check" class="mb-4 h-10 w-10 text-gold-700"/>
                 <p class="text-base font-semibold text-brand-800">Instant Confirmation</p>
                 <p class="mt-2 text-sm leading-relaxed text-ink-soft">Receive booking confirmations straight to your inbox.</p>
             </div>
             <div class="rounded-[var(--radius-card)] bg-white p-5 shadow-card">
+                <x-icon name="calendar" class="mb-4 h-10 w-10 text-gold-700"/>
                 <p class="text-base font-semibold text-brand-800">Flexible Options</p>
                 <p class="mt-2 text-sm leading-relaxed text-ink-soft">Choose convenient payment options that suit your group.</p>
             </div>
@@ -297,6 +317,9 @@
 <section class="section-y" aria-labelledby="testimonials-title">
     <div class="container-x">
         <x-section-heading :eyebrow="$t('testimonials_eyebrow')" :title="$t('testimonials_title')"/>
+        @if ($testimonials->contains(fn ($review) => $review->is_placeholder))
+            <p class="-mt-5 mb-6 text-center text-sm text-ink-soft">Quotes, names and locations shown here are fictional examples, not actual customer reviews.</p>
+        @endif
         <div class="grid gap-7 md:grid-cols-3">
             @foreach ($testimonials as $review)
                 <figure class="flex h-full flex-col rounded-[var(--radius-card)] bg-white p-7 shadow-card">
@@ -304,7 +327,6 @@
                     <blockquote class="mt-3 flex-1 text-ink-soft">{{ $review->quote }}</blockquote>
                     <figcaption class="mt-5 border-t border-brand-100 pt-4 text-sm">
                         <span class="font-semibold text-brand-800">{{ $review->name }}</span>@if ($review->location), <span class="text-ink-soft">{{ $review->location }}</span>@endif
-                        @if ($review->is_placeholder)<span class="ml-2 rounded bg-gold-100 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider text-gold-800">Placeholder</span>@endif
                     </figcaption>
                 </figure>
             @endforeach

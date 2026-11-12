@@ -50,12 +50,25 @@ class ContentSeeder extends Seeder
             }
         }
 
-        if (! Testimonial::exists()) {
-            foreach ([1, 2, 3] as $i) {
+        $sampleTestimonials = [
+            ['name' => 'Alex R.', 'location' => 'Seattle, WA', 'quote' => 'The planning process felt clear from the start. We could shape the itinerary around the places and pace that mattered to us.'],
+            ['name' => 'Jordan T.', 'location' => 'Portland, OR', 'quote' => 'Having different travel styles to choose from made it easier to picture a trip that would suit our group.'],
+            ['name' => 'Casey M.', 'location' => 'Chicago, IL', 'quote' => 'The details were easy to discuss, and the proposed journey gave us a helpful starting point for planning Austria.'],
+        ];
+        $placeholders = Testimonial::query()->where('is_placeholder', true)->orderBy('sort_order')->get();
+
+        if ($placeholders->isEmpty() && ! Testimonial::exists()) {
+            foreach ($sampleTestimonials as $index => $testimonial) {
                 Testimonial::create([
-                    'name' => 'Guest name', 'location' => 'City, State',
-                    'quote' => 'Placeholder testimonial. Replace this with a real guest review, with their permission, before launch.',
-                    'is_placeholder' => true, 'sort_order' => $i,
+                    'name' => $testimonial['name'], 'location' => $testimonial['location'], 'quote' => $testimonial['quote'],
+                    'is_placeholder' => true, 'sort_order' => $index + 1,
+                ]);
+            }
+        } else {
+            foreach ($placeholders->take(count($sampleTestimonials)) as $index => $placeholder) {
+                $placeholder->update([
+                    'name' => $sampleTestimonials[$index]['name'], 'location' => $sampleTestimonials[$index]['location'],
+                    'quote' => $sampleTestimonials[$index]['quote'],
                 ]);
             }
         }

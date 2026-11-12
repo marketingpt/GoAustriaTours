@@ -8,9 +8,9 @@
 return [
     'Hero' => [
         'hero_eyebrow' => ['Eyebrow', 'Austria · Tailor-made journeys', 'text'],
-        'hero_title' => ['Headline (line 1)', 'Discover Austria,', 'text'],
-        'hero_title_accent' => ['Headline (italic line 2)', 'the way it deserves.', 'text'],
-        'hero_sub' => ['Sub-heading', 'Self-drive, chauffeur-driven and coach journeys through Vienna, Salzburg, the Tyrol and the Alps, planned by specialists and tailored to you.', 'textarea'],
+        'hero_title' => ['Headline (line 1)', 'Explore Austria,', 'text'],
+        'hero_title_accent' => ['Headline (italic line 2)', 'your way.', 'text'],
+        'hero_sub' => ['Sub-heading', 'Self-drive, chauffeur and coach journeys shaped around your pace.', 'textarea'],
         'hero_media_id' => ['Hero image', '', 'media'],
         'badge_1_title' => ['Trust badge 1 title', 'Free, no-obligation quote', 'text'],
         'badge_1_text' => ['Trust badge 1 text', 'Tell us your plans, we do the planning.', 'text'],

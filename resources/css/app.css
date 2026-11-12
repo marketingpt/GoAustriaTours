@@ -23,6 +23,101 @@
         linear-gradient(90deg, rgb(15 29 23 / 0.65) 0%, rgb(15 29 23 / 0.1) 70%);
 }
 
+.hero-destinations {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.75rem;
+    border-top: 1px solid rgb(255 255 255 / 0.18);
+    background: rgb(15 29 23 / 0.48);
+    backdrop-filter: blur(10px);
+}
+
+.hero-destinations__label {
+    padding-left: max(1rem, calc((100vw - 80rem) / 2 + 2rem));
+    color: #e8d1a0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.hero-destinations__viewport {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.hero-destinations__track {
+    display: flex;
+    width: max-content;
+    animation: hero-destinations-scroll 36s linear infinite;
+}
+
+.hero-destinations__group {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: clamp(0.75rem, 1.6vw, 1.35rem);
+    padding: 1rem 0.75rem;
+    color: rgb(255 255 255 / 0.92);
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    white-space: nowrap;
+}
+
+.hero-destinations__group li::after {
+    content: "";
+    display: inline-block;
+    width: 0.35rem;
+    height: 0.35rem;
+    margin-left: clamp(0.75rem, 1.6vw, 1.35rem);
+    border-radius: 50%;
+    background: #d9b873;
+    vertical-align: middle;
+}
+
+.hero-destinations__viewport:hover .hero-destinations__track {
+    animation-play-state: paused;
+}
+
+@keyframes hero-destinations-scroll {
+    to { transform: translateX(-50%); }
+}
+
+@media (max-width: 40rem) {
+    .hero-destinations {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .hero-destinations__label {
+        padding: 0.7rem 1rem 0;
+        text-align: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-destinations__track {
+        width: 100%;
+        animation: none;
+    }
+
+    .hero-destinations__group {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        white-space: normal;
+    }
+
+    .hero-destinations__group[aria-hidden="true"] {
+        display: none;
+    }
+
+    .hero-destinations__viewport {
+        overflow: visible;
+    }
+}
+
 .site-header {
     position: sticky;
     top: 0;
